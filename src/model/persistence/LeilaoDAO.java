@@ -15,6 +15,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Properties;
 
+import javax.faces.context.FacesContext;
+
 /**
  *
  * @author Guilherme
@@ -25,7 +27,11 @@ public class LeilaoDAO{
 
     static {
         try {
-            FileInputStream fileInput = new FileInputStream(new File("D:\\Documentos\\SkyDrive\\Graduação\\PI\\Labs\\Leilao\\conf.properties"));
+        	FacesContext ctx = FacesContext.getCurrentInstance();
+        	String temp = ctx.getExternalContext().getInitParameter("arquivoConf");
+        	String pathConfProp = ctx.getExternalContext().getRealPath(temp);
+        	
+            FileInputStream fileInput = new FileInputStream(new File(pathConfProp));
             Properties properties = new Properties();
             properties.load(fileInput);
             fileName = properties.getProperty("storageFile");
