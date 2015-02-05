@@ -6,16 +6,13 @@
 package model;
 
 import java.io.Serializable;
-import model.Leilao.Key;
+import model.LeilaoModel.Key;
 import java.util.LinkedList;
 import java.util.List;
+
 import model.persistence.LeilaoDAO;
 
-/**
- *
- * @author Guilherme
- */
-public class Item implements Serializable{
+public class ItemModel implements Serializable{
 
     private Key key;
     private String productDescription;
@@ -25,7 +22,7 @@ public class Item implements Serializable{
     private List<Bid> bids;
     private double initialValue;
 
-    public Item(Key key, String description, double initialValue) {
+    public ItemModel(Key key, String description, double initialValue) {
         this.key = key;
         productDescription = description;
         bestValue = initialValue;
@@ -44,7 +41,7 @@ public class Item implements Serializable{
                 bids.add(bid);
                 winnerBid = bid;
                 bestValue = winnerBid.value;
-                LeilaoDAO.save(Leilao.getInstance());
+//                LeilaoDAO.save(LeilaoModel.getInstance());
             }
         }
     }
@@ -60,7 +57,7 @@ public class Item implements Serializable{
     public void setLock(boolean lock) {
         this.lock = lock;
         
-        LeilaoDAO.save(Leilao.getInstance());
+//        LeilaoDAO.save(LeilaoModel.getInstance());
     }
 
     public class Bid implements Serializable {
