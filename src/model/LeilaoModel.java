@@ -10,42 +10,52 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
+
+import javax.faces.bean.ManagedBean;
+
 import model.persistence.LeilaoDAO;
 
 /**
  *
  * @author Guilherme
  */
-public class Leilao implements Serializable{
+public class LeilaoModel implements Serializable{
 
-    private TreeMap<Key, Item> items;
-    private static Leilao INSTANCE;
+    private TreeMap<Key, ItemModel> items;
+    private static LeilaoModel INSTANCE;
     
-    private Leilao() {
-        items = new TreeMap<Key, Item>();
+    private LeilaoModel() {
+    	//
+    	Key key = new Key(2);
+    	ItemModel item = new ItemModel(key, "bla", 10);
+    	
+    	
+        items = new TreeMap<Key, ItemModel>();
+        
+        items.put(key, item);
     }
     
-    public static Leilao getInstance(){
+    public static LeilaoModel getInstance(){
         if(INSTANCE == null) {
-            if(!LeilaoDAO.checkFile()) {
-                INSTANCE = new Leilao();
-            } else {
-                INSTANCE = (Leilao) LeilaoDAO.load();
-            }
+//            if(!LeilaoDAO.checkFile()) {
+                INSTANCE = new LeilaoModel();
+//            } else {
+//                INSTANCE = (LeilaoModel) LeilaoDAO.load();
+//            }
             return INSTANCE;
         }
         return INSTANCE;        
     }
     
-    public Item getItem(Key key) {
+    public ItemModel getItem(Key key) {
         return items.get(key);
     }
     
-    public Collection<Item> getItens(boolean isLock) {
+    public Collection<ItemModel> getItems(boolean isLock) {
         
-        Collection<Item> itens = new LinkedList<Item>();
-        for(Map.Entry<Key, Item> entry : items.entrySet()) {
-            Item item = entry.getValue();
+        Collection<ItemModel> itens = new LinkedList<ItemModel>();
+        for(Map.Entry<Key, ItemModel> entry : items.entrySet()) {
+            ItemModel item = entry.getValue();
             if (item.isLock() == isLock) {
                 itens.add(item);
             }
@@ -53,14 +63,14 @@ public class Leilao implements Serializable{
         return itens;
     }
     
-    public Item createLote(String description, double initialValue) {
+    public ItemModel createLote(String description, double initialValue) {
         
         Key key = this.nextKey();
-        Item lote = new Item(key, description, initialValue);
+        ItemModel lote = new ItemModel(key, description, initialValue);
         
         items.put(key, lote);
         
-        LeilaoDAO.save(INSTANCE);
+//        LeilaoDAO.save(INSTANCE);
         
         return lote;
     }
@@ -101,7 +111,7 @@ public class Leilao implements Serializable{
     
     private Key nextKey(){
         
-        Map.Entry<Key,Item> lastEntry = items.lastEntry();
+        Map.Entry<Key,ItemModel> lastEntry = items.lastEntry();
         
         int keyValue = lastEntry == null ? 1 : lastEntry.getKey().getValue() + 1;
         Key next = new Key(keyValue);
