@@ -6,6 +6,7 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class AuthenticatorBean {
+	
 	private String id;
 	private String pass;
 	private boolean authenticated = false;

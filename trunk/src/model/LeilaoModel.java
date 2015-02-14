@@ -11,17 +11,14 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.faces.bean.ManagedBean;
-
-import model.persistence.LeilaoDAO;
-
 /**
  *
  * @author Guilherme
  */
 public class LeilaoModel implements Serializable{
 
-    private TreeMap<Key, ItemModel> items;
+	private static final long serialVersionUID = 1L;
+	private TreeMap<Key, ItemModel> items;
     private static LeilaoModel INSTANCE;
     
     private LeilaoModel() {
@@ -73,40 +70,6 @@ public class LeilaoModel implements Serializable{
 //        LeilaoDAO.save(INSTANCE);
         
         return lote;
-    }
-    
-    public static class Key implements Comparable, Serializable {
-        private Integer value;
-
-        public Key(int value) {
-            this.value = value;
-        }
-        
-        public Integer getValue() {
-            return value;
-        }
-
-        @Override
-        public int compareTo(Object o) {
-            if (o == null || !(o instanceof Key)) {
-                return 1;
-            }
-            
-            Key other = (Key) o;
-            
-            if (value < other.value) {
-                return -1;
-            } else if (value == other.value) {
-                return 0;
-            }
-            
-            return 1;
-        }
-        
-        @Override
-        public String toString() {
-            return value.toString();
-        }
     }
     
     private Key nextKey(){

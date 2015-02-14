@@ -17,10 +17,6 @@ import java.util.Properties;
 
 import javax.faces.context.FacesContext;
 
-/**
- *
- * @author Guilherme
- */
 public class LeilaoDAO{
 
     private static String fileName;
@@ -34,7 +30,7 @@ public class LeilaoDAO{
             FileInputStream fileInput = new FileInputStream(new File(pathConfProp));
             Properties properties = new Properties();
             properties.load(fileInput);
-            fileName = properties.getProperty("storageFile");
+            fileName = properties.getProperty("leiloesStorageFile");
             fileInput.close();
         } catch (IOException ex) {
             System.err.println("[CONFIG] Could not read the configuration file");

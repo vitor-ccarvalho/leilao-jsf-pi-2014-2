@@ -13,6 +13,7 @@
 							<h:outputText value="Leilões Abertos" />
 						</f:facet>
 						<h:outputText value="#{item.productDescription}" />
+						<h:commandButton action="alterarLeilao.jsf" value="" />
 					</h:column>
 				</h:dataTable>
 				<h:dataTable value="#{leiloesBean.fechados()}" var="item" border="1">
