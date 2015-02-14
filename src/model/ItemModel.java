@@ -6,17 +6,16 @@
 package model;
 
 import java.io.Serializable;
-import model.LeilaoModel.Key;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import model.persistence.LeilaoDAO;
-
 public class ItemModel implements Serializable{
 
-    private Key key;
+	private static final long serialVersionUID = 1L;
+	private Key key;
     private String productDescription;
-    private double bestValue;    
+    private double bestValue;
     private boolean lock;
     private Bid winnerBid;
     private List<Bid> bids;
@@ -37,17 +36,17 @@ public class ItemModel implements Serializable{
 
             Bid bid = new Bid(name, value);
 
-            if (winnerBid == null || bid.value > bestValue) {
+            if (getWinnerBid() == null || bid.getValue() > bestValue) {
                 bids.add(bid);
-                winnerBid = bid;
-                bestValue = winnerBid.value;
+                setWinnerBid(bid);
+                bestValue = getWinnerBid().getValue();
 //                LeilaoDAO.save(LeilaoModel.getInstance());
             }
         }
     }
 
     public Bid getWinner() {
-        return winnerBid;
+        return getWinnerBid();
     }
 
     public boolean isLock() {
@@ -58,30 +57,6 @@ public class ItemModel implements Serializable{
         this.lock = lock;
         
 //        LeilaoDAO.save(LeilaoModel.getInstance());
-    }
-
-    public class Bid implements Serializable {
-
-        private String person;
-        private Double value;
-
-        public Bid(String person, Double value) {
-
-            if (person != null && !person.isEmpty() && value != null && value > 0) {
-
-                this.person = person;
-                this.value = value;
-            }
-        }
-
-        public String getPerson() {
-            return person;
-        }
-
-        public Double getValue() {
-            return value;
-        }
-               
     }
 
     public Key getKey() {
@@ -97,10 +72,18 @@ public class ItemModel implements Serializable{
     }
 
     public List<Bid> getBids() {
-        return bids;
+        return bids == null? new ArrayList<Bid>() : bids;
     }
 
     public double getInitialValue() {
         return initialValue;
     }
+
+	public Bid getWinnerBid() {
+		return winnerBid;
+	}
+
+	public void setWinnerBid(Bid winnerBid) {
+		this.winnerBid = winnerBid;
+	}
 }

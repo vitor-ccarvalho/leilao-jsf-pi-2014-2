@@ -1,10 +1,8 @@
 package mBeans;
 
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import model.ItemModel;
 import model.LeilaoModel;
 
 @ManagedBean
@@ -34,7 +32,7 @@ public class ItemBean {
 		this.initialOffer = initialOffer;
 	}
 	
-	public String salve(){
+	public String save(){
 		LeilaoModel.getInstance().createLote(productDescription, initialOffer);
 		return "leilao";
 	}

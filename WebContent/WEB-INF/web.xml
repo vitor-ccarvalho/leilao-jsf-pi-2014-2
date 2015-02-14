@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
 
+	<!-- * DISPLAY PARAMS -->
+
 	<display-name>LeilaoJSF</display-name>
+
+	<!-- * CONTEXT PARAMS -->
 
 	<context-param>
 		<param-name>javax.faces.CONFIG_FILES</param-name>
@@ -61,14 +65,20 @@
 		<param-name>org.apache.myfaces.AUTO_SCROLL</param-name>
 		<param-value>true</param-value>
 	</context-param>
-	
+
+	<!-- * LISTENERS -->
+
 	<listener>
 		<listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
 	</listener>
-	
+
+	<!-- * WELCOME FILE LIST -->
+
 	<welcome-file-list>
 		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
+
+	<!-- * SERVLETS -->
 
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
@@ -76,9 +86,11 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
+	<!-- * SERVLET MAPPINGS -->
+
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>/faces/*</url-pattern>
 	</servlet-mapping>
-	
+
 </web-app>
