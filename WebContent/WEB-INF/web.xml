@@ -75,7 +75,7 @@
 	<!-- * WELCOME FILE LIST -->
 
 	<welcome-file-list>
-		<welcome-file>index.xhtml</welcome-file>
+		<welcome-file>faces/login.xhtml</welcome-file>
 	</welcome-file-list>
 
 	<!-- * SERVLETS -->

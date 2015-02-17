@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+      <ui:composition template="/template.xhtml">
+      	<ui:define name="content">	
+      	
+      	<div>
+      		<p>Lances recebidos</p>
+      		<p>Item: <h:outputText value="#{itemBean.productDescription}" />  </p>
+      		<p>Valor inicial: R$ <h:outputText value="#{itemBean.initialOffer}" />  </p>
+      	</div>
+      	
+      	<div>
+      		<h:dataTable value="#{itemBean.bids()}" var="bid" border="1">
+				<h:column>
+					<f:facet name="header"><h:outputText value="Nome" /></f:facet>
+					<h:outputText value="#{bid.person}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header"><h:outputText value="Valor" /></f:facet>
+					<h:outputText value="R$ #{bid.value}" />
+				</h:column>
+				</h:dataTable>
+      	</div>
+
+
+	     </ui:define>
+      </ui:composition>
+</html>

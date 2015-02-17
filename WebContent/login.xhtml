@@ -5,17 +5,18 @@
       xmlns:h="http://java.sun.com/jsf/html"> 
       <ui:composition template="/template.xhtml">
       	<ui:define name="content">		
-			Login
 			<h:form>
-				<h:panelGrid>
-					<h:outputText value="Login:" />
-					<h:inputText value="#{authenticatorBean.id}" required="true" size="20"/>
-					
-					<h:outputText value="Senha:" />
-					<h:inputSecret value="#{authenticatorBean.pass}" required="true" size="20"/>
-					
-					<h:commandButton action="#{authenticatorBean.check}" value="Entrar" />
-				</h:panelGrid>
+				<div class="simpleInput">
+					<h:panelGrid>
+						<h:outputText value="ID:" />
+						<h:inputText value="#{authenticatorBean.id}" required="true" size="20"/>
+						
+						<h:outputText value="Senha:" />
+						<h:inputSecret value="#{authenticatorBean.pass}" required="true" size="20"/>
+						
+						<h:commandButton action="#{authenticatorBean.check}" value="Entrar" />
+					</h:panelGrid>
+				</div>
 			</h:form>
 	     </ui:define>
       </ui:composition>
