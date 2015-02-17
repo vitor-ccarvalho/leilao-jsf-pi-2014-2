@@ -11,6 +11,8 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
+import model.persistence.LeilaoDAO;
+
 /**
  *
  * @author Guilherme
@@ -34,11 +36,11 @@ public class LeilaoModel implements Serializable{
     
     public static LeilaoModel getInstance(){
         if(INSTANCE == null) {
-//            if(!LeilaoDAO.checkFile()) {
+            if(!LeilaoDAO.checkFile()) {
                 INSTANCE = new LeilaoModel();
-//            } else {
-//                INSTANCE = (LeilaoModel) LeilaoDAO.load();
-//            }
+            } else {
+                INSTANCE = (LeilaoModel) LeilaoDAO.load();
+            }
             return INSTANCE;
         }
         return INSTANCE;        
@@ -67,7 +69,7 @@ public class LeilaoModel implements Serializable{
         
         items.put(key, lote);
         
-//        LeilaoDAO.save(INSTANCE);
+        LeilaoDAO.save(INSTANCE);
         
         return lote;
     }

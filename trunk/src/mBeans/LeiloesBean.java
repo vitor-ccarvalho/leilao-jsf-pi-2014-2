@@ -29,7 +29,7 @@ public class LeiloesBean {
     	Collection<ItemBean> itensBeans = new LinkedList<ItemBean>();
         
         for(ItemModel itemModel : itens) {
-        	ItemBean item = new ItemBean(itemModel.getProductDescription(), itemModel.getInitialValue());
+        	ItemBean item = new ItemBean(itemModel);
         	itensBeans.add(item);
         }
         

@@ -4,10 +4,11 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"> 
       <ui:composition template="/template.xhtml">
-      	<ui:define name="content">	
-			<h:form>
+      	<ui:define name="content">
+      		<div class="simpleInput">	
+				<h:form rendered="#{authenticatorBean.admin}">
 					<h:panelGrid>
-						<h:outputText value="Descricao:" />
+						<h:outputText value="Descrição:" />
 						<h:inputText value="#{itemBean.productDescription}" required="true" size="20"/>
 						
 						<h:outputText value="Valor inicial:" />
@@ -16,6 +17,7 @@
 						<h:commandButton action="#{itemBean.save}" value="Abrir leilão" />
 					</h:panelGrid>
 				</h:form>
+			</div>
 	     </ui:define>
       </ui:composition>
 </html>

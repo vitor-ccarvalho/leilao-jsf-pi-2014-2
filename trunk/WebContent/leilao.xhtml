@@ -5,25 +5,74 @@
       xmlns:h="http://java.sun.com/jsf/html"> 
       <ui:composition template="/template.xhtml">
       	<ui:define name="content">	
-			<h:button value="Abrir" outcome="novoItem.xhtml" rendered="#{authenticatorBean.authenticated}"></h:button>
+			<div style="text-align: right">
+				<h:form><p>Olá <h:outputText value="#{authenticatorBean.id}" rendered="#{authenticatorBean.authenticated}" />! <h:commandLink action="#{authenticatorBean.logout()}" value="Sair"/></p></h:form>  
+			</div>
 			
-			<h:dataTable value="#{leiloesBean.abertos()}" var="item" border="1">
+			<div>
+				<h:form>
+					<b><h:commandLink value="Abrir um leilão" action="novoItem.xhtml" rendered="#{authenticatorBean.isAdmin()}" /></b>
+				</h:form>
+			</div>
+			
+			<div>
+				<p>Leilões abertos</p>
+				<h:dataTable value="#{leiloesBean.abertos()}" var="item" rendered="#{authenticatorBean.authenticated}" border="1" width="100%" style="{text-align: center}">
 					<h:column>
-						<f:facet name="">
-							<h:outputText value="Leilões Abertos" />
-						</f:facet>
-						<h:outputText value="#{item.productDescription}" />
-						<h:commandButton action="alterarLeilao.jsf" value="" />
-					</h:column>
-				</h:dataTable>
-				<h:dataTable value="#{leiloesBean.fechados()}" var="item" border="1">
-					<h:column>
-						<f:facet name="">
-							<h:outputText value="Leilões Fechados" />
-						</f:facet>
+						<f:facet name="header"><h:outputText value="Descrição" /></f:facet>
 						<h:outputText value="#{item.productDescription}" />
 					</h:column>
+					<h:column>
+						<f:facet name="header"><h:outputText value="Último lance" /></f:facet>
+						<h:outputText value="R$ #{item.bestOffer()}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header"><h:outputText value="Ações" /></f:facet>
+						<h:form>
+							<h:commandButton action="darLance.xhtml" value="Dar lance">
+								<f:setPropertyActionListener value="#{item.itemModel}" target="#{bidBean.itemModel}" />
+							</h:commandButton>
+						</h:form>
+					</h:column>
+					<h:column rendered="#{authenticatorBean.isAdmin()}" class="adminColumn">
+						<f:facet name="header"><h:outputText value="Ações administrativas" /></f:facet>
+						<h:form>
+							<h:commandButton action="bids.xhtml" value="Listar lances">
+								<f:setPropertyActionListener value="#{item}" target="#{itemBean}" />
+							</h:commandButton>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<h:commandButton action="#{item.close()}" value="Fechar"/>
+						</h:form>
+					</h:column>
+					
 				</h:dataTable>
+			</div>
+			<div>
+				<p>Leilões fechados</p>
+				<h:dataTable value="#{leiloesBean.fechados()}" var="item" rendered="#{authenticatorBean.authenticated}" border="1" width="100%" style="{text-align: center}">
+					<h:column>
+						<f:facet name="header"><h:outputText value="Descrição" /></f:facet>
+						<h:outputText value="#{item.productDescription}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header"><h:outputText value="Lance vencedor" /></f:facet>
+						<h:outputText value="R$ #{item.bestOffer()}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header"><h:outputText value="Nome do vencedor" /></f:facet>
+						<h:outputText value="#{item.bestNameOffer()}" />
+					</h:column>
+					<h:column rendered="#{authenticatorBean.isAdmin()}">
+						<f:facet name="header"><h:outputText value="Ações administrativas" /></f:facet>
+						<h:form>						
+							<h:commandButton action="bids.xhtml" value="Listar lances">
+								<f:setPropertyActionListener value="#{item}" target="#{itemBean}" />
+							</h:commandButton>
+						</h:form>
+					</h:column>
+				</h:dataTable>
+			</div>
+
 	     </ui:define>
       </ui:composition>
 </html>

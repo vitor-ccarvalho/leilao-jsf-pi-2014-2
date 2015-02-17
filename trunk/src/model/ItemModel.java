@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import model.persistence.LeilaoDAO;
+
 public class ItemModel implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -40,13 +42,9 @@ public class ItemModel implements Serializable{
                 bids.add(bid);
                 setWinnerBid(bid);
                 bestValue = getWinnerBid().getValue();
-//                LeilaoDAO.save(LeilaoModel.getInstance());
+                LeilaoDAO.save(LeilaoModel.getInstance());
             }
         }
-    }
-
-    public Bid getWinner() {
-        return getWinnerBid();
     }
 
     public boolean isLock() {
@@ -56,7 +54,7 @@ public class ItemModel implements Serializable{
     public void setLock(boolean lock) {
         this.lock = lock;
         
-//        LeilaoDAO.save(LeilaoModel.getInstance());
+        LeilaoDAO.save(LeilaoModel.getInstance());
     }
 
     public Key getKey() {

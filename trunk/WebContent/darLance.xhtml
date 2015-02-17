@@ -5,17 +5,23 @@
       xmlns:h="http://java.sun.com/jsf/html"> 
       <ui:composition template="/template.xhtml">
       	<ui:define name="content">	
-			<h:form>
+      		<div class="simpleInput">
+				<div>
+					<h5><h:outputText value="Item: #{bidBean.itemModel.productDescription}" /></h5>
+					<h5><h:outputText value="Melhor lance: R$ #{bidBean.itemModel.bestValue}" /></h5>
+      			</div>
+				<h:form rendered="#{authenticatorBean.authenticated}">
 					<h:panelGrid>
-						<h:outputText value="Lance:" />
-						<h:inputText value="#{bidBean.value}" required="true" size="20"/>
-						
 						<h:outputText value="Nome:" />
 						<h:inputText value="#{bidBean.person}" required="true" size="20"/>
 						
-						<h:commandButton action="#{}" value="Abrir leilão" />
+						<h:outputText value="Lance:" />
+						<h:inputText value="#{bidBean.value}" required="true" size="20"/>
+						
+						<h:commandButton action="#{bidBean.darLance()}" value="Dar lance" />
 					</h:panelGrid>
 				</h:form>
+			</div>
 	     </ui:define>
       </ui:composition>
 </html>
